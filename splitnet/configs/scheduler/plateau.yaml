@@ -1,0 +1,7 @@
+# @package _group_
+cls:
+  _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
+  mode: "min"
+  factor: 0.1
+  patience: 1
+monitor: "valid_loss"

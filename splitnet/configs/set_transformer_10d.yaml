@@ -1,0 +1,23 @@
+defaults:
+  - datamodule: basic_synth_10D
+  - model: split_transformer_d10
+  - optimizer: adam
+  - training: default_training
+  - loss: BCE
+  - override hydra/job_logging: colorlog
+  - override hydra/hydra_logging: colorlog
+
+general:
+  seed: 12345
+  include_tests: true
+  early_stopping: false
+  exp_dir: "."
+  exp_name: "splitnet"
+  exp_tags:
+    - "baseline"
+    - "set transformer"
+
+hydra:
+  output_subdir: ${general.exp_dir} # Disable saving of config files. We'll do that ourselves.
+  run:
+    dir: ${general.exp_dir} # Set working dir to current directory

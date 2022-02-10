@@ -1,0 +1,4 @@
+models:
+  2d_model_path: "path_to_SplitNet_model/last.ckpt"
+  10d_model_path: "path_to_SplitNet_model/last.ckpt" 
+  20d_model_path: "path_to_SplitNet_model/last.ckpt" 

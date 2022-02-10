@@ -1,0 +1,27 @@
+# @package _group_
+albumentation: false
+train:
+  augs:
+    - _target_: torchvision.transforms.RandomCrop
+      size: ${datamodule.cfg.image_size}
+      pad_if_needed: False
+      fill: 0
+
+    - _target_: torchvision.transforms.ToTensor
+
+    - _target_: torchvision.transforms.Resize
+      size: ${datamodule.cfg.image_size}
+
+    - _target_: torchvision.transforms.Normalize
+      mean: ${datamodule.cfg.normalize.mean}
+      std: ${datamodule.cfg.normalize.std}
+test:
+  augs:
+    - _target_: torchvision.transforms.ToTensor
+
+    - _target_: torchvision.transforms.Resize
+      size: ${datamodule.cfg.image_size}
+
+    - _target_: torchvision.transforms.Normalize
+      mean: ${datamodule.cfg.normalize.mean}
+      std: ${datamodule.cfg.normalize.std}

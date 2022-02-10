@@ -1,0 +1,56 @@
+# @package _group_
+_target_: src.data.datamodules.SyntheticSplitData
+cfg:
+  curriculum_schedule: true
+  resample_batch: false
+  use_hr_threshold: true
+  multi_k: false
+  K_max: 5
+  data_props:
+    train:
+      data_gen_alpha: 10
+      dimension: 10
+      num_points: 4096
+      kappa: 0.1
+      nu: 20
+      dp_alpha: 100
+      hr_threshold: 0.001
+
+      curriculum_params:
+        total_epochs: ${training.max_epochs}
+        final_kappa: 5
+        final_nu: 11
+        final_data_gen_alpha: 2
+        update_every: 20
+
+    test:
+      - set_tag: "easy"
+        dimension: ${datamodule.cfg.data_props.train.dimension}
+        num_points: 4096
+        kappa: 0.1
+        nu: 20
+        data_gen_alpha: 100
+        dp_alpha: 100
+
+      - set_tag: "medium"
+        dimension: ${datamodule.cfg.data_props.train.dimension}
+        num_points: 4096
+        kappa: 1
+        nu: 15
+        data_gen_alpha: 10
+        dp_alpha: 100
+
+      - set_tag: "hard"
+        dimension: ${datamodule.cfg.data_props.train.dimension}
+        num_points: 4096
+        kappa: 5
+        nu: 11
+        data_gen_alpha: 2
+        dp_alpha: 100
+
+  train_samples: 10000
+  valid_samples: 400
+  test_samples: 255
+  dataloaders:
+    num_workers: 4
+    batch_size: 4

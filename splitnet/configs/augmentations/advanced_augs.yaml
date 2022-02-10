@@ -1,0 +1,33 @@
+# @package _group_
+albumentation: true
+train:
+  augs:
+    - _target_: albumentations.ShiftScaleRotate
+      shift_limit: 0.0625
+      scale_limit: 0.1
+      rotate_limit: 15
+
+    - _target_: albumentations.Resize
+      height: ${datamodule.cfg.image_size}
+      width: ${datamodule.cfg.image_size}
+
+    - _target_: albumentations.Normalize
+      p: 1.0
+      mean: ${datamodule.cfg.normalize.mean}
+      std: ${datamodule.cfg.normalize.std}
+
+    - _target_: albumentations.pytorch.transforms.ToTensorV2
+      p: 1.0
+test:
+  augs:
+    - _target_: albumentations.Resize
+      width: ${datamodule.cfg.image_size}
+      height: ${datamodule.cfg.image_size}
+
+    - _target_: albumentations.Normalize
+      p: 1.0
+      mean: ${datamodule.cfg.normalize.mean}
+      std: ${datamodule.cfg.normalize.std}
+      
+    - _target_: albumentations.pytorch.transforms.ToTensorV2
+      p: 1.0

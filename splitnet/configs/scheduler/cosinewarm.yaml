@@ -1,0 +1,8 @@
+# @package _group_
+cls:
+  _target_: torch.optim.lr_scheduler.CosineAnnealingWarmRestarts
+  T_0: 150
+  T_mult: 3
+  eta_min: 0
+monitor: "valid_loss"
+# step: step

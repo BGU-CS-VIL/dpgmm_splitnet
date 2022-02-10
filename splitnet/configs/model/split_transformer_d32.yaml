@@ -1,0 +1,9 @@
+_target_: src.models.models.SplitTransformer
+dim_input: ${datamodule.cfg.data_props.train.dimension}
+pma_seeds: 1
+num_inds: 128
+dim_hidden: 256
+num_encoders: 3
+num_decoders: 3
+num_heads: 16
+ln: true
